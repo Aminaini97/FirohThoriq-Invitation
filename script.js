@@ -210,19 +210,17 @@ const coupleObserver = new IntersectionObserver((entries) => {
             coupleObserver.unobserve(entry.target);
         }
     });
-}, { threshold: 0.30 });
+}, { threshold: 0.15 });
 
 coupleCards.forEach(card => {
     coupleObserver.observe(card);
 });
 
 // === 7. ANIMASI GALERI FOTO ===
-// HAPUS BAGIAN INI KARENA SUDAH TIDAK DIPAKAI (VERSI HORIZONTAL)
-// === 7. ANIMASI GALERI FOTO ===
 const galleryOptions = {
     root: document.querySelector('.horizontal-scroll'),
     rootMargin: '0px',
-    threshold: 0.75
+    threshold: 0.15
 };
 
 const galleryObserver = new IntersectionObserver((entries) => {
@@ -274,7 +272,7 @@ const bottomObserver = new IntersectionObserver((entries) => {
             bottomObserver.unobserve(entry.target);
         }
     });
-}, { threshold: 0.1 }); // Muncul saat 10% terlihat
+}, { threshold: 0.05 }); // Muncul saat 10% terlihat
 
 bottomElements.forEach(el => {
     bottomObserver.observe(el);

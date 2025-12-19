@@ -1,0 +1,686 @@
+/* =========================================
+   STYLE.CSS - THE WEDDING OF (SPOTIFY THEME)
+   ========================================= */
+
+:root {
+    /* PALET WARNA */
+    --bg-color: #0b1016;
+    --bg-gradient: linear-gradient(180deg, #1e2a38 0%, #0b1016 40%);
+    --text-white: #ffffff;
+    --text-gray: #b3b3b3;
+    --accent-gold: #d4af37;
+    --player-bg: #181818;
+    --primary-color: #D4AF37;
+    --splash-bg-overlay: rgba(30, 25, 20, 0.9); /* Lebih pekat */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+#splash-screen {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 99999; /* Pastikan paling atas */
+    border-radius: inherit;
+    background-color: #000;
+    display: flex; justify-content: center; align-items: center;
+    transition: all 1s ease-in-out;
+}
+
+/* Class untuk menyembunyikan splash screen */
+#splash-screen.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none; /* Agar tidak bisa diklik lagi setelah hilang */
+}
+
+/* Background Foto yang diblur */
+.splash-bg {
+    position: absolute; top: -20px; left: -20px; right: -20px; bottom: -20px;
+    background-size: cover;
+    background-position: center;
+    filter: blur(15px); /* Efek blur kuat */
+    transform: scale(1.1); /* Zoom dikit biar pinggiran rapi */
+    z-index: -2;
+}
+
+/* Overlay Warna Hangat/Coklat */
+.splash-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: var(--splash-bg-overlay);
+    z-index: -1;
+}
+
+/* Konten Tengah */
+.splash-content {
+    text-align: center;
+    color: var(--splash-gold);
+    padding: 30px;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Foto Oval */
+.hero-oval-img {
+    width: 180px; height: 220px; /* Bentuk lonjong vertikal */
+    border-radius: 50% / 50%; /* Membuat oval */
+    border: 3px solid var(--splash-gold);
+    overflow: hidden;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+.hero-oval-img img {
+    width: 100%; height: 100%; object-fit: cover;
+}
+
+/* Tipografi */
+.intro-text {
+    font-size: 0.8rem; letter-spacing: 4px; text-transform: uppercase;
+    margin-bottom: 10px; color: #ddd;
+}
+.main-couple-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem; font-weight: 400;
+    color: #fff; margin-bottom: 40px;
+}
+.guest-info p {
+    font-size: 0.9rem; color: #ccc; margin-bottom: 5px;
+}
+#guestName {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem; color: #fff; font-weight: 700;
+    margin-bottom: 30px;
+}
+.closing-intro {
+    font-size: 0.8rem; color: #aaa; line-height: 1.6;
+    margin-bottom: 40px; padding: 0 20px;
+}
+
+/* Tombol Buka */
+.open-button {
+    background-color: #5A4A3A; /* Coklat tua */
+    color: #fff;
+    border: 1px solid var(--splash-gold);
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-size: 0.9rem; font-weight: 600; letter-spacing: 1px;
+    cursor: pointer;
+    display: flex; align-items: center; gap: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+.open-button:hover {
+    background-color: var(--splash-gold);
+    color: #333;
+    transform: translateY(-3px);
+}
+.open-button i { font-size: 1.1rem; }
+
+/* Container Utama Mobile */
+.mobile-container {
+    width: 100%;
+    max-width: 480px;
+    height: 100vh;
+    background: var(--bg-color);
+    background: var(--bg-gradient);
+    color: var(--text-white);
+    position: relative;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    /* padding-bottom: 80px; */
+}
+
+/* =========================================
+   1. HERO SECTION (VIDEO & PLAYER)
+   ========================================= */
+
+.hero-container {
+    position: relative;
+    width: 100%;
+    min-height: 100vh; /* Full layar HP */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Konten di bawah */
+    overflow: hidden;
+    color: white;
+    padding-bottom: 20px;
+}
+
+/* Video Background */
+.hero-bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40%; /* Tinggi video */
+    object-fit: cover;
+    position: absolute;
+    z-index: 0;
+}
+
+/* Overlay Gelap */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.95) 50%, #0b1016 100%);
+    z-index: -1;
+}
+
+/* UI Player (Progress Bar & Tombol) */
+.player-interface {
+    padding: 20px;
+    width: 100%;
+    z-index: 2;
+    margin-top: 60vh; /* Dorong ke bawah */
+}
+
+/* Progress Bar */
+.progress-area-hero {
+    margin-bottom: 15px;
+}
+.progress-bar {
+    width: 100%;
+    height: 4px;
+    background-color: rgba(255,255,255,0.3);
+    border-radius: 2px;
+    position: relative;
+}
+.progress-fill {
+    width: 30%; /* Statis dulu */
+    height: 100%;
+    background-color: #fff;
+    border-radius: 2px;
+    position: relative;
+}
+.progress-fill::after {
+    content: ''; 
+    position: absolute; right: -6px; top: -4px;
+    width: 12px; height: 12px;
+    background: #fff; border-radius: 50%;
+}
+.time-stamps {
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-gray);
+    font-size: 0.75rem;
+    margin-top: 8px;
+}
+
+/* Tombol Kontrol */
+.controls-hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 0 10px;
+}
+.secondary-icon { font-size: 1.2rem; color: #b3b3b3; }
+.main-icon { font-size: 2rem; color: #fff; }
+
+.play-circle-hero {
+    width: 70px;
+    height: 70px;
+    background-color: #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.play-circle-hero:active { transform: scale(0.95); }
+
+/* Judul & Metadata (RATA TENGAH) */
+.song-meta-hero {
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #b3b3b3;
+    margin-bottom: 5px;
+    font-weight: 600;
+    text-align: left;
+    display: block;
+}
+
+.song-title-hero {
+    text-align: left;
+    width: 100%;
+    /* padding: 0 0px; */
+}
+.song-title-hero h2 {
+    font-size: 1.2rem;
+    font-weight: 900;
+    margin-bottom: 5px;
+}
+
+/* Tanggal Rilis (Pengganti Kotak Kuning) */
+.release-date-text {
+    font-size: 0.75rem;
+    color: #b3b3b3;
+    margin-bottom: 25px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-align: left;
+    display: block;
+}
+
+/* Lyrics Card */
+.lyrics-card {
+    /* Gradient Biru Gelap (Sesuai Pria) */
+    background: linear-gradient(135deg, #004e92 0%, #000428 100%);
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+.lyrics-header { margin-bottom: 15px; }
+.lyrics-header span {
+    background-color: rgba(255,255,255,0.2);
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 10px;
+    letter-spacing: 1px;
+}
+.lyrics-content p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+.lyrics-source {
+    font-size: 0.8rem !important;
+    font-weight: 700 !important;
+    color: rgba(255,255,255,0.7) !important;
+    margin-bottom: 0 !important;
+}
+
+/* Divider (Pemisah) */
+.divider-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+    opacity: 0.7;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.divider-text {
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    color: #b3b3b3;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.divider-line {
+    height: 1px;
+    background-color: #333;
+    width: 60px;
+}
+
+/* Countdown Timer */
+.countdown-box {
+    display: flex;
+    gap: 10px;
+    margin: 0 10px 40px 10px;
+    justify-content: center;
+}
+.time-item {
+    background-color: #1e1e1e; /* Kotak Gelap */
+    border: 1px solid #333;
+    flex: 1;
+    padding: 10px 5px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+.time-item .number {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+}
+.time-item .label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    color: var(--primary-color);
+    margin-top: 2px;
+    display: block;
+}
+
+/* =========================================
+   2. PROFIL & UNDANGAN
+   ========================================= */
+
+.artist-profile-section {
+    padding: 20px 20px 20px 20px;
+    background-color: #0b1016;
+}
+
+/* Teks Undangan (Fade Up) */
+.invitation-message {
+    font-size: 0.8rem;
+    color: #ccc; 
+    line-height: 1.6;
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 4px;
+    
+    /* Animasi */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 1.2s ease-out;
+}
+.invitation-message:last-of-type { margin-bottom: 30px; }
+.invitation-message.show-animate { opacity: 1; transform: translateY(0); }
+.invitation-message:nth-of-type(2) { transition-delay: 0.2s; }
+.invitation-message:nth-of-type(3) { transition-delay: 0.4s; }
+
+/* Mini Player Card */
+.mini-spotify-card {
+    background-color: #2a2a2a;
+    border-radius: 8px;
+    padding: 12px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    margin-bottom: 30px;
+    cursor: pointer;
+    
+    /* Animasi */
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    transition: all 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.mini-spotify-card.show-animate { opacity: 1; transform: translateY(0) scale(1); }
+.mini-left-content { display: flex; align-items: center; gap: 12px; }
+.mini-album-img { width: 45px; height: 45px; border-radius: 4px; object-fit: cover; }
+.mini-text-info { display: flex; flex-direction: column; }
+.mini-title-song { color: #fff; font-size: 0.9rem; font-weight: 700; }
+.mini-artist-name { color: #b3b3b3; font-size: 0.8rem; }
+.mini-right-controls { display: flex; align-items: center; gap: 15px; }
+.icon-green-wave { color: #1ed760; font-size: 1.1rem; }
+
+/* === TAMBAHAN UNTUK MERAPIKAN NAMA & CENTANG BIRU === */
+
+.artist-header {
+    display: flex;         /* Wajib: Biar baris ke samping */
+    align-items: center;   /* Rata tengah vertikal */
+    gap: 8px;              /* Jarak nama ke centang */
+    margin-bottom: 5px;
+}
+
+.verified-blue {
+    color: #3d91f4;
+    font-size: 1rem;
+    background: #fff;
+    border-radius: 50%;
+    border: 2px solid #fff; /* Ring putih */
+    display: inline-block;
+}
+
+/* Kartu Mempelai (Couple) */
+.single-artist-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    margin-bottom: 25px;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    color: #fff;
+    position: relative;
+    width: 85%; /* Lebar sedikit dikurangi */
+    cursor: pointer;
+    
+    /* Animasi Masuk */
+    opacity: 0;
+    will-change: transform, opacity;
+    transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1), 
+                opacity 1.2s ease-out;
+}
+.single-artist-card.show-animate { opacity: 1; transform: translateX(0); }
+.single-artist-card:hover { transform: scale(1.03) !important; }
+
+/* Groom (Pria) - Biru */
+.groom-card {
+    background: linear-gradient(135deg, #004e92 0%, #000428 100%);
+    margin-left: auto;
+    margin-right: 0;
+    transform: translateX(50px); /* Awalnya geser kanan */
+}
+
+/* Bride (Wanita) - Pink/Ungu */
+.bride-card {
+    background: linear-gradient(135deg, #2b1055 0%, #7597de 100%);
+    margin-right: auto;
+    margin-left: 0;
+    transform: translateX(-50px); /* Awalnya geser kiri */
+}
+
+.artist-img-box { width: 90px; height: 90px; flex-shrink: 0; }
+.single-img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: 2px solid rgba(255,255,255,0.2); }
+.artist-info-box { flex-grow: 1; }
+.single-name { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 2px; }
+.role-label { font-size: 0.7rem; color: var(--primary-color); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.parents-info p { font-size: 0.65rem; color: #b3b3b3; margin-bottom: 2px; font-style: italic; }
+.parents-info strong { display: block; font-size: 0.8rem; color: #eee; }
+.ig-btn-small { display: inline-block; font-size: 0.7rem; font-weight: 700; color: #fff; border: 1px solid #777; padding: 5px 15px; border-radius: 20px; text-decoration: none; margin-top: 10px; }
+
+/* =========================================
+   3. TOUR / EVENTS SECTION
+   ========================================= */
+
+.tour-section {
+    padding: 20px;
+    border-top: 1px solid #222;
+}
+.section-title { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 20px; }
+
+.tour-card {
+    display: flex;
+    align-items: center;
+    background-color: #121212;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    
+    /* Animasi */
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.tour-card.show-animate { opacity: 1; transform: translateY(0); }
+
+/* Delay Antrian Tour */
+.tour-card:nth-of-type(1) { transition-delay: 0.1s; }
+.tour-card:nth-of-type(2) { transition-delay: 0.2s; }
+
+.tour-date-box {
+    background-color: var(--primary-color);
+    width: 50px; height: 50px; border-radius: 6px;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    margin-right: 15px; flex-shrink: 0;
+}
+.tour-date-box .month { font-size: 0.6rem; font-weight: 700; color: #000; }
+.tour-date-box .day { font-size: 1.2rem; font-weight: 800; color: #000; line-height: 1; }
+.tour-details { flex-grow: 1; }
+.tour-name { font-size: 1rem; font-weight: 700; color: #fff; }
+/* Update Style di Bagian Tour */
+
+.tour-venue {
+    font-size: 0.9rem;
+    color: #fff;       /* Warna Putih untuk Nama Gedung */
+    font-weight: 600;  /* Agak tebal */
+    margin-bottom: 2px;
+}
+
+/* TAMBAHAN BARU: Style Alamat */
+.tour-address {
+    font-size: 0.75rem;      /* Ukuran font lebih kecil */
+    color: #b3b3b3;          /* Warna abu-abu */
+    line-height: 1.4;        /* Jarak antar baris biar enak dibaca */
+    margin-bottom: 8px;      /* Jarak ke Jam */
+    max-width: 90%;          /* Agar tidak terlalu lebar ke samping */
+}
+
+/* Update Jam agar jaraknya pas */
+.tour-time {
+    font-size: 0.75rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-top: 0;           /* Reset margin atas */
+}
+.map-btn { font-size: 0.7rem; font-weight: 700; color: #fff; border: 1px solid #fff; padding: 6px 12px; border-radius: 20px; text-decoration: none; margin-left: auto; }
+
+.map-container {
+    margin-top: 10px; border-radius: 12px; overflow: hidden; opacity: 0.8;
+    /* Animasi Peta */
+    opacity: 0; transform: translateY(30px); transition: all 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.map-container.show-animate { opacity: 0.8; transform: translateY(0); }
+
+/* =========================================
+   4. GALLERY GRID (2 KOLOM)
+   ========================================= */
+
+.gallery-section { margin-top: 20px; padding-bottom: 20px; }
+
+.vertical-gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 Kolom */
+    gap: 15px;
+    padding: 0 20px;
+    width: 100%;
+}
+
+.gallery-card {
+    width: 100%;
+    aspect-ratio: 3/4; /* Portrait */
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    background-color: #222;
+    
+    /* Animasi Staggered */
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.gallery-card.show-animate { opacity: 1; transform: translateY(0); }
+
+/* Delay Kiri-Kanan */
+.vertical-gallery .gallery-card:nth-child(odd) { transition-delay: 0s; }
+.vertical-gallery .gallery-card:nth-child(even) { transition-delay: 0.2s; }
+
+.gallery-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+.gallery-card:hover .gallery-img { transform: scale(1.05); }
+
+.gallery-overlay {
+    position: absolute; bottom: 0; left: 0; width: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+    padding: 20px 10px 10px 10px;
+    display: flex; flex-direction: column;
+}
+.track-name { color: #fff; font-weight: 700; font-size: 0.9rem; font-family: 'Playfair Display', serif; margin-bottom: 2px; }
+.track-year { color: var(--primary-color); font-size: 0.65rem; font-weight: 600; letter-spacing: 1px; }
+
+/* =========================================
+   5. GIFT SECTION (KARTU KREDIT)
+   ========================================= */
+
+.gift-section { padding: 30px 20px; text-align: center; border-top: 1px solid #222; }
+.gift-message { font-size: 0.85rem; color: #b3b3b3; line-height: 1.6; margin-bottom: 30px; padding: 0 10px; }
+.bank-container { display: flex; flex-direction: column; gap: 20px; align-items: center; }
+
+.bank-card {
+    width: 100%; max-width: 350px; height: 200px;
+    background: linear-gradient(135deg, #2c3e50 0%, #000000 100%);
+    border-radius: 15px; padding: 25px; position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    display: flex; flex-direction: column; justify-content: space-between;
+    text-align: left; border: 1px solid rgba(255,255,255,0.1);
+    
+    /* Animasi */
+    opacity: 0; transform: translateY(40px); transition: all 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.bank-card.show-animate { opacity: 1; transform: translateY(0); }
+.bank-card:nth-child(2) { background: linear-gradient(135deg, #434343 0%, #000000 100%); }
+
+.card-chip img { width: 40px; opacity: 0.8; }
+.bank-logo { position: absolute; top: 25px; right: 25px; font-size: 1.2rem; font-weight: 800; color: #fff; font-style: italic; }
+.card-number { font-family: 'Courier New', monospace; font-size: 1.4rem; color: #fff; font-weight: 700; letter-spacing: 2px; margin-top: 20px; }
+.card-details { display: flex; justify-content: space-between; align-items: flex-end; }
+.card-holder span { font-size: 0.6rem; color: #ccc; text-transform: uppercase; }
+.card-holder strong { font-size: 0.9rem; color: #fff; letter-spacing: 1px; }
+
+.copy-btn {
+    background-color: var(--primary-color); color: #000; border: none; padding: 6px 15px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: transform 0.2s;
+}
+.copy-btn:active { transform: scale(0.95); }
+
+/* =========================================
+   6. CLOSING & EXTRAS
+   ========================================= */
+
+.closing-section { text-align: center; padding: 40px 20px 100px 20px; margin-top: 30px; border-top: 1px solid #222; }
+.closing-logo i { font-size: 4rem; color: #1ed760; margin-bottom: 25px; filter: drop-shadow(0 0 10px rgba(30, 215, 96, 0.3)); transform: scale(0); transition: transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.closing-logo.show-animate i { transform: scale(1); }
+
+.closing-message { font-size: 0.9rem; color: #b3b3b3; line-height: 1.6; margin-bottom: 40px; padding: 0 10px; }
+.see-you { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: #888; margin-bottom: 5px; }
+.signature-name { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: #fff; }
+
+/* Floating Music Button */
+.music-fab {
+    position: fixed; bottom: 30px; right: 30px;
+    width: 50px; height: 50px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    display: flex; justify-content: center; align-items: center;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+    z-index: 9999; cursor: pointer;
+    border: 2px solid #fff;
+    transition: all 0.3s ease;
+}
+.music-fab i { color: #000; font-size: 1.2rem; }
+.music-fab.playing { animation: spinMusic 3s linear infinite; background-color: #fff; }
+.music-fab.playing i { color: var(--primary-color); }
+@keyframes spinMusic { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+/* ANIMASI UMUM (General) */
+/* Class untuk animasi elemen text umum seperti closing, dll */
+.bottom-animate {
+    opacity: 0; transform: translateY(20px); transition: all 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.bottom-animate.show-animate { opacity: 1; transform: translateY(0); }

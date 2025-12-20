@@ -73,21 +73,52 @@ body {
     align-items: center;
 }
 
-/* Foto Oval */
-.hero-oval-img {
-    width: 180px; height: 220px; /* Bentuk lonjong vertikal */
-    border-radius: 50% / 50%; /* Membuat oval */
-    border: 3px solid var(--splash-gold);
-    overflow: hidden;
-    margin-bottom: 30px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
-.hero-oval-img img {
-    width: 100%; height: 100%; object-fit: cover;
+/* 1. Wadah Utama */
+.frame-container {
+    position: relative; /* Wajib 'relative' agar isinya bisa ditumpuk (absolute) */
+    width: 280px;       /* Lebar total bingkai */
+    height: 350px;      /* Tinggi total bingkai (karena bentuknya oval lonjong) */
+    margin: 0 auto 5px; /* Rata tengah secara horizontal & jarak bawah */
+    /* Background sementara untuk melihat area wadah (bisa dihapus nanti) */
+    /* background-color: rgba(255,0,0,0.2); */
 }
 
+/* 2. Foto Pasangan (Layer Bawah) */
+.couple-photo {
+    position: absolute; /* Agar bisa ditumpuk */
+    z-index: 1;         /* Layer paling bawah */
+    
+    /* Mengatur ukuran foto agar pas di DALAM area emas */
+    width: 70%;         
+    height: 70%;
+    object-fit: cover;  /* Agar foto tidak gepeng */
+    border-radius: 50%; /* Membentuk foto jadi oval/bulat */
+    
+    /* Trik untuk menaruh foto persis di tengah-tengah wadah */
+    top: 49%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* 3. Bingkai Emas (Layer Atas) */
+.gold-frame-overlay {
+    position: absolute; /* Agar bisa menimpa foto */
+    z-index: 2;         /* Layer di atas foto */
+    
+    width: 100%;        /* Memenuhi area wadah */
+    height: 100%;
+    top: 0;
+    left: 0;
+    
+    /* Agar bingkai tidak menghalangi klik (opsional, good practice) */
+    pointer-events: none; 
+    
+    /* Memberi sedikit bayangan pada bingkai agar terlihat timbul */
+    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5));
+}
 /* Tipografi */
 .intro-text {
+    margin-top: -20px !important; /* Angka minus menarik elemen ke atas */
     font-size: 0.8rem; letter-spacing: 4px; text-transform: uppercase;
     margin-bottom: 10px; color: #ddd;
 }
@@ -102,7 +133,7 @@ body {
 #guestName {
     font-family: 'Playfair Display', serif;
     font-size: 1.8rem; color: #fff; font-weight: 700;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 .closing-intro {
     font-size: 0.8rem; color: #aaa; line-height: 1.6;
